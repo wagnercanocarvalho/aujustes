@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Cadastro Imóvel Rural PWA</title>
+    <link rel="stylesheet" href="../../css/cadastro_rural.css">
+</head>
+<body>
+    <h1>Corretor Digital Portal Imóveis no Vale do Ribeira</h1>
+
+    <div class="theme-selector">
+        <label><input type="radio" name="theme" value="light" checked onclick="setTheme('light')"> Light</label>
+        <label><input type="radio" name="theme" value="dark" onclick="setTheme('dark')"> Dark</label>
+        <label><input type="radio" name="theme" value="night" onclick="setTheme('night')"> Noturno</label>
+    </div>
+
+    <form action="../../php/imoveis/rurais.php" method="post" id="formImovel">
+        <fieldset>
+            <legend>Dados Gerais</legend>
+
+          <fieldset>
+                <legend>Tipo de Imóvel (obrigatório):</legend>
+                <div class="select-container">
+                    <select id="tipo" name="tipo" required>
+                        <option value="0">Selecione</option>
+                       <option value="ARR">Área Rural</option>
+                        <option value="CH">Chácara</option>
+                        <option value="FA">Fazenda</option>
+                        <option value="HTF">Área Rural</option>
+                        <option value="POU">Pousada</option>
+                        <option value="ST">Sítio</option>
+                        <option value="GL">Galpão Logístico</option>
+                        <option value="PT-COM">Ponto Comercial</option>
+                        <option value="COM-MIS">Comercial e Residencial</option>
+                    </select>
+                    </div>
+            </fieldset>
+            <p>
+                <label for="nome_propriedade">Nome do Proprietário (obrigatório):</label>
+                <input type="text" id="nome_proprietario" name="nome_proprietario" required>
+            </p>
+            <p>
+                <label for="nome_propriedade">Nome da Propriedade (obrigatório):</label>
+                <input type="text" id="nome_propriedade" name="nome_propriedade" required>
+            </p>
+
+            <p>
+                <label for="municipio">Município (obrigatório):</label>
+                <input type="text" id="municipio" name="municipio" required>
+            </p>
+
+            <p>
+                <label for="localizacao_imagem">Localização (Imagem Google Earth):</label>
+                <input type="url" id="localizacao_imagem" name="localizacao_imagem" placeholder="URL da imagem">
+                </p>
+
+            <p>
+                <label for="coordenadas_geograficas">Coordenadas Geográficas:</label>
+                <input type="text" id="coordenadas_geograficas" name="coordenadas_geograficas" placeholder="Latitude, Longitude">
+                <button type="button" class="coordinate-button" onclick="capturarLocalizacao()">Capturar Coordenadas</button>
+                <a id="google_earth_link" href="#" target="_blank" class="google-earth-link" style="display: none;">Ver no Google Earth</a>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Logística</legend>
+            <p>
+                <label for="logistica">Logística:</label>
+                <textarea id="logistica" name="logistica" rows="3" cols="50"></textarea>
+            </p>
+
+            <p>
+                <label for="km_estrada_pavimentada">KM até estrada pavimentada:</label>
+                <input type="number" id="km_estrada_pavimentada" name="km_estrada_pavimentada" min="0">
+            </p>
+
+            <p>
+                <label for="cidade_proxima">Cidade mais próxima:</label>
+                <input type="text" id="cidade_proxima" name="cidade_proxima">
+            </p>
+
+            <!-- Industriais ao Redor -->
+            <fieldset>
+                <legend>Industriais ao Redor</legend>
+                <!-- <div class="select-container">
+                    <select id="industriais_ao_redor" name="industriais_ao_redor[]" multiple>
+                        <option value="Armazéns logísticos">Armazéns logísticos</option>
+                        <option value="Laticínios">Laticínios</option>
+                        <option value="Fábrica de conservas">Fábrica de conservas</option>
+                        <option value="Palmitaría">Palmitaría</option>
+                        <option value="Climatizadora de frutas">Transportadoras</option>
+                    </select>
+                    <div class="add-item">
+                        <input type="text" class="new-item-input" placeholder="Novo item" name="industriais_ao_redor">
+                        <button type="button" class="add-item-button" onclick="addItem('industriais_ao_redor')">+</button>
+                    </div>
+                </div> -->
+                <div class="select-container">
+                    <select id="industriais_ao_redor" name="industriais_ao_redor[]" multiple>
+                        <option value="Armazéns logísticos">Armazéns logísticos</option>
+                        <option value="Laticínios">Laticínios</option>
+                        <option value="Fábrica de conservas">Fábrica de conservas</option>
+                        <option value="Palmitaría">Palmitaría</option>
+                        <option value="Climatizadora de frutas">Transportadoras</option>
+                    </select>
+                    <div class="add-item">
+                        <input type="text" class="new-item-input" placeholder="Novo item"name=hidrografia"">
+                        <button type="button" class="add-item-button" onclick="addItem('hidrografia')">+</button>
+                    </div>
+                </div>
+            </fieldset>       
+        </fieldset>
+
+<!-- Segmentação -->
+<fieldset>
+    <legend>Segmentação</legend>
+    <!-- <div class="select-container">
+        <select id="segmentacao" name="segmentacao[]" multiple>
+            <option value="APP">APP</option>
+            <option value="APP">Arroz</option>
+            <option value="Área Agricultável">Área Agricultável</option>
+            <option value="Banana">Banana</option>
+            <option value="Limão">Limão</option>
+            <option value="Lúpulo">Lúpulo</option>
+            <option value="Milho">Milho</option>
+            <option value="Pasto">Pasto</option>
+            <option value="Reserva Legal">Reserva Legal</option>
+            <option value="Tanques para psicultura">Tanques para psicultura</option>
+        </select>
+        <div class="add-item">
+            <input type="text" class="new-item-input" placeholder="Novo item" name="segmentacao">
+            <button type="button" class="add-item-button" onclick="addItem('segmentacao')">+</button>
+        </div>
+    </div> -->
+    <div class="select-container">
+        <select id="segmentacao" name="segmentacao[]" multiple>
+            <option value="APP">APP</option>
+            <option value="APP">Arroz</option>
+            <option value="Área Agricultável">Área Agricultável</option>
+            <option value="Banana">Banana</option>
+            <option value="Limão">Limão</option>
+            <option value="Lúpulo">Lúpulo</option>
+            <option value="Milho">Milho</option>
+            <option value="Pasto">Pasto</option>
+            <option value="Reserva Legal">Reserva Legal</option>
+            <option value="Tanques para psicultura">Tanques para psicultura</option>
+        </select>
+        <div class="add-item">
+            <input type="text" class="new-item-input" placeholder="Novo item"name=hidrografia"">
+            <button type="button" class="add-item-button" onclick="addItem('hidrografia')">+</button>
+        </div>
+</fieldset>
+
+<!-- Hidrografia -->
+<fieldset>
+    <legend>Hidrografia</legend>
+    <div class="select-container">
+        <select id="hidrografia" name="hidrografia[]" multiple>
+            <option value="Nascentes">Nascentes</option>
+            <option value="Córregos">Córregos</option>
+            <option value="Rios">Rios</option>
+            <option value="Represas">Represas</option>
+            <option value="Poços">Poços</option>
+            <option value="Cisternas">Cisternas</option>
+            <option value="Artesianos">Artesianos</option>
+            <option value="Semi-artesiano">Semi-artesiano</option>
+            <option value="Outorga de Água">Outorga de Água</option>
+        </select>
+        <div class="add-item">
+            <input type="text" class="new-item-input" placeholder="Novo item"name=hidrografia"">
+            <button type="button" class="add-item-button" onclick="addItem('hidrografia')">+</button>
+        </div>
+    </div>
+</fieldset>
+
+<!-- Topografia -->
+<fieldset>
+    <legend>Topografia</legend>
+    <div class="select-container">
+        <select id="topografia" name="topografia[]" multiple>
+            <option value="Plana">Plana</option>
+            <option value="Semiplana">Semiplana</option>
+            <option value="Ondulada">Ondulada</option>
+            <option value="Semi-ondulada">Semi-ondulada</option>
+            <option value="Acidentada">Acidentada</option>
+            <option value="Semi-acidentada">Semi-acidentada</option>
+        </select>
+        <div class="add-item">
+            <input type="text" class="new-item-input" placeholder="Novo item">
+            <button type="button" class="add-item-button" onclick="addItem('topografia')">+</button>
+        </div>
+    </div>
+    <p>
+        <label for="topografia_graus">Em graus:</label>
+        <input type="number" id="topografia_graus" name="topografia_graus">
+    </p>
+</fieldset>
+
+<!-- Documentos -->
+<fieldset>
+    <legend>Documentos</legend>
+    <div class="select-container">
+        <select id="documentos" name="documentos[]" multiple>
+            <option value="Mapa Topográfico">Mapa Topográfico</option>
+            <option value="Mapa Planialtimétrico">Mapa Planialtimétrico</option>
+            <option value="Matrícula">Matrícula</option>
+            <option value="Autorização de Venda">Autorização de Venda</option>
+            <option value="Posse">Posse</option>
+            <option value="Arrendamento">Arrendamento</option>
+            <option value="CAR">CAR</option>
+            <option value="ITR">ITR</option>
+            <option value="CCIR">CCIR</option>
+            <option value="GEO">GEO</option>
+            <option value="SIGEF">SIGEF</option>
+        </select>
+        <div class="add-item">
+            <input type="text" class="new-item-input" placeholder="Novo item" ma,e="documentos">
+            <button type="button" class="add-item-button" onclick="addItem('documentos')">+</button>
+        </div>
+    </div>
+</fieldset>
+        <p>
+            <label for="altitude">Altitude:</label>
+            <input type="number" id="altitude" name="altitude">
+            </p>
+        <fieldset>
+            <legend>Tipo de Solo</legend>
+            <p>
+                <label for="tipo_solo">Tipo de Solo:</label>
+                <textarea id="tipo_solo" name="tipo_solo" rows="3" cols="50"></textarea>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Acesso</legend>
+            <p>
+                <label for="como_chegar">Como Chegar (Roteiro de Acesso):</label>
+                <textarea id="como_chegar" name="como_chegar" rows="5" cols="50"></textarea>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Benfeitorias</legend>
+            <div class="select-container">
+                <select id="benfeitorias" name="benfeitorias[]" multiple>
+                <option value="Casa sede">Casa sede</option>
+                <option value="Casa p/ colaboradores">Casa p/ colaboradores</option>
+                <option value=>Currais</option>
+                <option value=>Cercas</option>
+                <option value="Balança">Balança</option>
+                <option value="Galpões">Galpões</option>
+                <option value="Brete">Brete</option>
+                <option value="Vivêiro (plantas)">Vivêiro (plantas)</option>
+                <option value="Biodigestores">Biodigestores</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Energia</legend>
+                <div class="select-container">
+                    <select id="energia" name="energia[]" multiple>
+                    <option value="Pública">Pública</option>
+                    <option value="Painéis solares">Painéis solares</option>
+                    <option value="Heólica">Heólica</option>
+                    <option value="Hidroelétrica">Hidroelétrica</option>
+                    <option value="127V">127V</option>
+                    <option value="220V">220V</option>
+                    <option value="380V">380V</option>
+                    <option value="440V">440V</option>
+                    <option value="Monofásica">Monofásica</option>
+                    <option value="Trifásica">Trifásica</option>
+                    </select>
+                </div>
+                
+        </fieldset>
+
+        <fieldset>
+            <legend>Financeiro</legend>
+            <p>
+                <label for="preco">Preço:</label>
+                <input type="number" id="preco" name="preco" step="0.01">
+            </p>
+
+            <p>
+                <label for="forma_pagamento">Forma de Pagamento:</label>
+                <textarea id="forma_pagamento" name="forma_pagamento" rows="3" cols="50"></textarea>
+            </p>
+        </fieldset>
+       
+        <button type="submit">IMVR-CADs Cadastrar Imóvel Rural</button>
+       </form>
+        
+    <script src="../../js/app.js"></script>
+    <script src="../../js/cadastro/cadastro_rural.js"></script>
+    <script>
+        window.addEventListener('online', () => {
+            console.log("Conexão restabelecida. Atualizando botões...");
+            atualizarBotoes();
+        });
+
+        window.addEventListener('offline', () => {
+            console.log("Sem conexão. Atualizando botões...");
+            atualizarBotoes();
+        });
+        
+    document.getElementById('formImovel').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(this);
+
+        fetch('../../php/imoveis/rurais.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                if (confirm(result.confirm)) {
+                    window.location.href = `../../html/camera/camera.html?id_imovel=${result.id}`;
+                } else {
+                    // Optional: Handle the case where the user clicks "Cancel"
+                    alert('Você optou por não capturar fotos agora.');
+                }
+            } else {
+                alert('Erro: ' + result.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Ocorreu um erro ao enviar o formulário.');
+        });
+    });
+</script>
+
+</body>
+</html>
