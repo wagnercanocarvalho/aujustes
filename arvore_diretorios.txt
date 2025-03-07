@@ -1,0 +1,154 @@
+/meu-pwa/
+      	└──fotos/
+		└──/ imgages (diretorio que armazena as imagens dos imóveis capturadas em camera.html)
+	   	├── camera.css
+		├── camera.html
+	   	├── camera.js
+		├── index.html
+		├── index.js
+		├── upload_camera.php
+
+	 └──php/
+  	       └──xml/
+	       └──csv/
+	       └──geo/
+		     ├── azimute.html (captura o marco-00 no local e insere as coordenadas do azimute para gerar o polígono no google maps)
+		     ├── app.js
+	  	     ├── download_geojson.php
+	 	     ├── index.html
+	  	     ├── salvar_coordenadas.phP
+ 		     ├── busca_sncr.php
+	  ├── buscar_imoveis.php
+	  ├── consultar_imoveis.php
+	  ├── convert_csv.php
+	  ├── convert_xml.php
+	  ├── edita_imovel.php
+	  ├── grava_autorizacao.php
+	  ├── includes.php
+	  ├── info.php
+	  ├── listar_imoveis.php
+	
+├── app.js	 (Lógica JavaScript)
+├── auth.php
+├── autorizacao_sem_exclusividade.html
+├── busca_sncr.html
+├── cadastro_rural.css
+├── cadastro_rural.html
+├── cadastro_rural.js  (Lógica JavaScript do cadastro_rural)
+├── cadastro_usuario.php
+├── check_auth.php
+├── conectar.php (string de conexão ao mysql)
+├── conect.php (string de conexão ao ftp)
+├── consultar.html
+├── index.html          (Página inicial com os botões/ícones)
+├── inser_usuario.php
+├── listar.php
+├── logout.php
+├── manifest.json	(Configurações do PWA)
+├── processa_cadastro.php
+├── rurais.php
+├── salvar_cliente.php
+├── salvar_imovel.php
+├── styles.css
+├── sync.php
+
+Excelente! Ter uma visão clara da estrutura de diretórios é fundamental para a organização e manutenção do seu PWA. Vamos analisar a estrutura atual e propor melhorias para torná-la mais organizada e eficiente.
+
+Análise da estrutura atual:
+
+Raiz do projeto (/meu-pwa/):
+A raiz contém arquivos essenciais como index.html, manifest.json, app.js e folhas de estilo (styles.css).
+Também contém arquivos PHP de autenticação (auth.php, check_auth.php, logout.php).
+Diretório fotos/:
+Contém arquivos relacionados à captura de fotos e imagens, incluindo HTML, CSS, JavaScript e um script PHP de upload.
+Diretório php/:
+Contém a maioria dos scripts PHP, incluindo lógica de banco de dados, conversão de arquivos e outras funcionalidades.
+Subdiretórios xml/, csv/ e geo/ organizam ainda mais os scripts PHP por tipo de funcionalidade.
+Arquivos soltos:
+Vários arquivos HTML e PHP estão localizados diretamente na raiz do projeto, o que pode dificultar a organização.
+Propostas de melhoria:
+
+Organização dos arquivos PHP:
+
+Mova todos os arquivos PHP relacionados ao banco de dados para um subdiretório php/db/.
+Mova os arquivos de autenticação para um subdiretório php/auth/.
+Mova os arquivos de cadastro e edição de imóveis para um subdiretorio php/imoveis/.
+Mova o arquivo rurais.php para o subdiretorio php/imoveis/.
+Organização dos arquivos JavaScript:
+
+Crie um subdiretório js/ na raiz do projeto e mova todos os arquivos JavaScript para lá.
+Dentro de js/, crie subdiretórios para organizar ainda mais os scripts por funcionalidade (por exemplo, js/cadastro/, js/mapa/, etc.).
+Organização dos arquivos CSS:
+
+Crie um subdiretório css/ na raiz do projeto e mova todos os arquivos CSS para lá.
+Organização dos arquivos HTML:
+
+Crie subdiretórios para agrupar os arquivos html por funcionalidade.
+Padronização de nomes de arquivos:
+
+Adote uma convenção de nomenclatura consistente para seus arquivos (por exemplo, cadastro-rural.js, cadastro-rural.php, etc.).
+Remoção de arquivos não utilizados:
+
+Revise a lista de arquivos e remova quaisquer arquivos que não estejam mais sendo usados.
+Estrutura de diretórios revisada:
+
+/meu-pwa/
+├── css/
+│   ├── camera.css
+│   ├── cadastro_rural.css
+│   └── styles.css
+├── html/
+│   ├── cadastro/
+│   │   ├── cadastro_rural.html
+│   │   └── autorizacao_sem_exclusividade.html
+│   ├── geo/
+│   │   ├── azimute.html
+│   │   └── index.html
+│   ├── imoveis/
+│   │   ├── consultar.html
+│   │   └── busca_sncr.html
+│   ├── camera.html
+│   ├── index.html
+├── imgages/
+├── js/
+│   ├── cadastro/
+│   │   └── cadastro_rural.js
+│   ├── geo/
+│   │   └── app.js
+│   ├── camera.js
+│   ├── app.js
+│   └── index.js
+├── php/
+│   ├── auth/
+│   │   ├── auth.php
+│   │   ├── check_auth.php
+│   │   ├── cadastro_usuario.php
+│   │   ├── insere_usuario.php
+│   │   └── logout.php
+│   ├── db/
+│   │   ├── conectar.php
+│   │   └── conect.php
+│   ├── geo/
+│   │   ├── download_geojson.php
+│   │   ├── salvar_coordenadas.php
+│   │   └── busca_sncr.php
+│   ├── imoveis/
+│   │   ├── buscar_imoveis.php
+│   │   ├── consultar_imoveis.php
+│   │   ├── edita_imovel.php
+│   │   ├── grava_autorizacao.php
+│   │   ├── listar_imoveis.php
+│   │   ├── processa_cadastro.php
+│   │   ├── rurais.php
+│   │   ├── salvar_cliente.php
+│   │   └── salvar_imovel.php
+│   ├── xml/
+│   │   └── convert_xml.php
+│   ├── csv/
+│   │   └── convert_csv.php
+│   ├── includes.php
+│   ├── info.php
+│   ├── sync.php
+├── manifest.json
+└── upload_camera.php
+
