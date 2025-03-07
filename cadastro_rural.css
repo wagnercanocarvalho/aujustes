@@ -1,0 +1,324 @@
+/* Estilos CSS (MANTENHA O CSS ANTERIOR INTACTO - RESPONSIVIDADE E TEMAS) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: var(--body-bg-color);
+    color: var(--text-color);
+}
+
+h1 {
+    text-align: center;
+    color: var(--heading-color);
+}
+
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--form-bg-color);
+}
+
+fieldset {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+legend {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: var(--legend-bg-color);
+    color: var(--legend-text-color);
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: var(--label-color);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+textarea {
+    width: calc(100% - 22px); /* Ajuste para padding e borda */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #05aa0d;
+    border-radius: 4px;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+button[type="submit"],
+.media-button,
+.coordinate-button,
+.google-earth-link {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-block; /* Para alinhar os botões de mídia */
+    margin-right: 5px; /* Espaçamento entre botões de mídia */
+}
+
+button[type="submit"]:hover,
+.media-button:hover,
+.coordinate-button:hover,
+.google-earth-link:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+
+/* Estilos para responsividade */
+@media screen and (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    textarea {
+        width: calc(100% - 16px); /* Ajuste menor para telas menores */
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+    button[type="submit"],
+    .media-button,
+    .coordinate-button,
+    .google-earth-link {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+/* Temas de Cores (CSS Variables) - MANTENHA INTACTO */
+:root {
+    --body-bg-color: #f4f4f4;
+    --text-color: #333;
+    --heading-color: #297e34;
+    --form-bg-color: #fff;
+    --legend-bg-color: #eee;
+    --legend-text-color: #333;
+    --label-color: #555;
+    --input-bg-color: #fff;
+    --input-text-color: #333;
+    --button-bg-color: #007bff;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #0056b3;
+}
+
+/* Tema Dark - MANTENHA INTACTO */
+.dark-theme {
+    --body-bg-color: #333;
+    --text-color: #eee;
+    --heading-color: #4dfa6a;
+    --form-bg-color: #444;
+    --legend-bg-color: #555;
+    --legend-text-color: #eee;
+    --label-color: #f7ff9c;
+    --input-bg-color: #555;
+    --input-text-color: #eee;
+    --button-bg-color: #016f06;
+    --button-text-color: #f4ffbf;
+    --button-hover-bg-color: #0277bd;
+}
+
+/* Tema Noturno (Mais escuro que o Dark) - MANTENHA INTACTO */
+.night-theme {
+    --body-bg-color: #121212;
+    --text-color: #ddd;
+    --heading-color: #4dfa6a;
+    --form-bg-color: #212121;
+    --legend-bg-color: #333;
+    --legend-text-color: #ddd;
+    --label-color: #e6f91d;
+    --input-bg-color: #333;
+    --input-text-color: #ddd;
+    --button-bg-color: #016f06;
+    --button-text-color: #f7ff9c;
+    --button-hover-bg-color: #00838f;
+}
+
+/* Estilo para o botão de captura de coordenadas - MANTENHA INTACTO */
+.coordinate-button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: var(--button-bg-color); /* Usando a cor do botão primário para consistência */
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    vertical-align: top; /* Alinha verticalmente com o campo de texto */
+    margin-left: 5px;
+}
+
+.coordinate-button:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+/* Estilo para o link do Google Earth - MANTENHA INTACTO */
+.google-earth-link {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid var(--button-bg-color); /* Cor da borda igual à do botão */
+    border-radius: 4px;
+    background-color: transparent; /* Fundo transparente */
+    color: var(--button-bg-color); /* Cor do texto igual à do botão */
+    text-decoration: none;
+    font-size: 0.9rem;
+    vertical-align: top;
+    margin-left: 5px;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+}
+
+.google-earth-link:hover {
+    background-color: var(--button-bg-color); /* Inverte cores no hover */
+    color: var(--button-text-color);
+}
+
+/* Estilos para o seletor de tema - MANTENHA INTACTO */
+.theme-selector {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.theme-selector label {
+    margin: 0 10px;
+}
+
+/* Estilos para a seção de mídia */
+.media-section {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--form-bg-color);
+}
+
+.media-section legend {
+    background-color: var(--legend-bg-color);
+    color: var(--legend-text-color);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.media-buttons {
+    margin-bottom: 10px;
+}
+
+#video-preview {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Garante que a margem automática funcione */
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Cor de fundo para vídeo */
+    max-height: 300px; /* Altura máxima para o vídeo */
+}
+
+#photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.photo-preview-container {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; /* Garante que a imagem não vaze do container */
+    position: relative;
+}
+
+.photo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche o container mantendo a proporção */
+    display: block;
+}
+
+/* Add styles for delete photo button */
+.btn-excluir {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 0, 0, 0.7);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Estilos para o container de seleção */
+.select-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.select-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.select-container select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.add-item {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.new-item-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.add-item-button {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-item-button:hover {
+    background-color: #218838;
+}
